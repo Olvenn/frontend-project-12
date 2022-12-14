@@ -34,6 +34,7 @@ const Auth = () => {
       try {
         console.log(values);
       } catch (err) {
+        console.log(err);
         if (err.isAxiosError && err.response.status === 401) {
           setValidated(true);
           inputRef.current.select();

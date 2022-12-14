@@ -9,6 +9,9 @@ const Layout = () => (
             <a className="navbar-brand" href="/">
               Hexlet Chat
             </a>
+            <button type="button" className="btn btn-primary">
+              Выйти
+            </button>
           </div>
         </nav>
         <Outlet />
