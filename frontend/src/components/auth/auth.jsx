@@ -1,40 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
-const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .required('Required'),
-  password: yup
-    .string()
-    .required('Required'),
-});
+import routes from '../../routes';
 
 const Auth = () => {
   const [validated, setValidated] = useState(false);
   const inputRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  const initialValues = {
-    username: '',
-    password: '',
-  };
+  const validationSchema = yup.object().shape({
+    username: yup
+      .string()
+      .trim()
+      .required('Required'),
+    password: yup
+      .string()
+      .trim()
+      .required('Required'),
+  });
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      username: '',
+      password: '',
+    },
     validationSchema,
     onSubmit: async (values) => {
       setValidated(false);
 
       try {
-        console.log(values);
+        console.log(routes.loginPath());
+        const res = await axios.post(routes.loginPath(), values);
+        localStorage.setItem('userId', JSON.stringify(res.data));
+        // auth.logIn();
+        // const { from } = location.state || { from: { pathname: '/' } };
+        navigate('/');
       } catch (err) {
-        console.log(err);
         if (err.isAxiosError && err.response.status === 401) {
           setValidated(true);
           inputRef.current.select();
@@ -54,7 +62,7 @@ const Auth = () => {
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                 <img src="./images/avatar.jpg" className="rounded-circle" alt="Войти" />
               </div>
-              <Form className="col-12 col-md-6 mt-3 mt-mb-0">
+              <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">Войти</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
@@ -86,7 +94,7 @@ const Auth = () => {
                     required
                   />
                   <Form.Label htmlFor="password">Пароль</Form.Label>
-                  <Form.Control.Feedback class="invalid-tooltip" type="invalid">
+                  <Form.Control.Feedback className="invalid-tooltip" type="invalid">
                     Неверные имя пользователя или пароль
                   </Form.Control.Feedback>
                 </Form.Group>

@@ -60,7 +60,7 @@ const MainPage = () => (
                   aria-label="Новое сообщение"
                   placeholder="Введите сообщение..."
                   className="border-0 p-0 ps-2 form-control"
-                  value=""
+                // value=""
                 />
                 <button
                   type="submit"
