@@ -4,35 +4,28 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
-import { useState } from 'react';
 import NotFoundPage from './components/not-found-page/not-found-page';
 import MainPage from './components/main-page/main-page';
 import Auth from './components/auth/auth';
-import AuthContext from './contexts/index.jsx';
 // import PrivateRoute from './components/private-route/private-route';
 import useAuth from './hooks/index';
+import AuthProvider from './providers/AuthProvider';
 
-const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+// const AuthProvider = ({ children }) => {
+//   const [loggedIn, setLoggedIn] = useState(false);
 
-  const logIn = () => setLoggedIn(true);
-  const logOut = () => {
-    localStorage.removeItem('userId');
-    setLoggedIn(false);
-  };
+//   const logIn = () => setLoggedIn(true);
+//   const logOut = () => {
+//     localStorage.removeItem('userId');
+//     setLoggedIn(false);
+//   };
 
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-// const AuthRedirect = () => {
-//   const auth = useAuth();
-
-//   return auth.loggedIn ? <Navigate to="/login" replace /> : <MainPage />;
+//   return (
+//     // eslint-disable-next-line react/jsx-no-constructed-context-values
+//     <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
 // };
 
 const PrivateRoute = ({ children }) => {
