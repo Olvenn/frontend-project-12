@@ -10,7 +10,7 @@ import MainPage from './components/main-page/main-page';
 import Auth from './components/auth/auth';
 import AuthContext from './contexts/index.jsx';
 // import PrivateRoute from './components/private-route/private-route';
-// import useAuth from './hooks/index';
+import useAuth from './hooks/index';
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,19 +29,23 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const MainPageRoute = () => {
-  const auth = true;
+// const MainPageRoute = () => {
+//   const auth = true;
 
-  return (
-    auth.user ? <MainPage /> : <Navigate to="/login" />
-  );
+//   return (
+//     auth.user ? <MainPage /> : <Navigate to="/login" />
+//   );
+// };
+const PrivateRoute = ({ children }) => {
+  const auth = useAuth();
+  return auth ? children : <Navigate to="/login" />;
 };
 
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPageRoute />} />
+        <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
         <Route path="login" element={<Auth />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
