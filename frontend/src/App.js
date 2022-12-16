@@ -29,17 +29,25 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const AuthRedirect = () => {
+// const AuthRedirect = () => {
+//   const auth = useAuth();
+
+//   return auth.loggedIn ? <Navigate to="/login" replace /> : <MainPage />;
+// };
+
+const PrivateRoute = ({ children }) => {
   const auth = useAuth();
 
-  return auth.loggedIn ? <Navigate to="/login" replace /> : <MainPage />;
+  return (
+    auth.loggedIn ? children : <Navigate to="/login" replace />
+  );
 };
 
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AuthRedirect />} />
+        <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
         <Route path="login" element={<Auth />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
