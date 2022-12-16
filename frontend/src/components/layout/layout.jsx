@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
-const Layout = () => (
+const Layout = ({ children }) => (
   <div className="h-100">
     <div className="h-100" id="chat">
       <div className="d-flex flex-column h-100">
@@ -14,7 +14,7 @@ const Layout = () => (
             </button>
           </div>
         </nav>
-        <Outlet />
+        {children}
       </div>
       <div className="Toastify" />
     </div>
