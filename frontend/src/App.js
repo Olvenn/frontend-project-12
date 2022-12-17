@@ -32,7 +32,7 @@ const PrivateRoute = ({ children }) => {
   const auth = useAuth();
 
   return (
-    auth.loggedIn ? children : <Navigate to="/login" replace />
+    auth.userName !== 'guest' ? children : <Navigate to="/login" replace />
   );
 };
 
