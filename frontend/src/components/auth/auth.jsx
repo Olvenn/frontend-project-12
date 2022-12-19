@@ -40,7 +40,7 @@ const Auth = () => {
 
       try {
         const res = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(res.data));
+        // localStorage.setItem('userId', JSON.stringify(res.data));
         // alert(JSON.stringify(res.data));
         auth.logIn(res.data);
         navigate('/');
