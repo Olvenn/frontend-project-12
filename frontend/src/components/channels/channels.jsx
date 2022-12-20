@@ -1,8 +1,12 @@
-import Cannel from '../channel/channel';
+import { useSelector } from 'react-redux';
+import Channel from '../channel/channel';
+import { selectors } from '../../store/reducers/channels';
+
+// import { fetchData } from '../../store/api-actions';
 
 const Cannels = () => {
-  const cannel = [];
-  console.log(cannel);
+  const channels = useSelector(selectors.selectAll);
+  console.log('adgas', channels);
 
   return (
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
@@ -22,7 +26,12 @@ const Cannels = () => {
         </button>
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2">
-        <Cannel />
+        {channels?.map((channel) => (
+          <Channel
+            key={channel.id}
+            channel={channel}
+          />
+        ))}
       </ul>
     </div>
   );

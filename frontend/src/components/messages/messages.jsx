@@ -1,6 +1,7 @@
 const Messages = () => {
   const message = [];
-  console.log(message);
+  console.log('message', message);
+
   return (
     <div id="messages-box" className="chat-messages overflow-auto px-5 ">
       <div className="text-break mb-2">
