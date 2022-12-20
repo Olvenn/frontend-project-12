@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { fetchChannels } from '../api-actions';
+import { fetchData } from '../api-actions';
 
 const channelsAdapter = createEntityAdapter();
 
@@ -16,8 +16,7 @@ const channelsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // .addCase(fetchChannels.fulfilled, channelsAdapter.addMany);
-      .addCase(fetchChannels.fulfilled, (state, action) => {
+      .addCase(fetchData.fulfilled, (state, action) => {
         const { channels, currentChannelId } = action.payload;
         channelsAdapter.setAll(state, channels);
         state.currentChannelId = currentChannelId;

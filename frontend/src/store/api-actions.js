@@ -13,10 +13,12 @@ const getAuthHeader = () => {
   return {};
 };
 
-export const fetchChannels = createAsyncThunk(
+export const fetchData = createAsyncThunk(
   'tasks/fetchTasks',
   async () => {
     const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
+    console.log('response', response.data);
+
     return response.data;
   },
 );

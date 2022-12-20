@@ -2,8 +2,6 @@ import { useSelector } from 'react-redux';
 import Channel from '../channel/channel';
 import { selectors } from '../../store/reducers/channels';
 
-// import { fetchData } from '../../store/api-actions';
-
 const Cannels = () => {
   const channels = useSelector(selectors.selectAll);
   console.log('adgas', channels);

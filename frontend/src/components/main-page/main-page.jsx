@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { fetchChannels } from '../../store/reducers/channels';
-import { fetchChannels } from '../../store/api-actions';
+import { fetchData } from '../../store/api-actions';
 import Layout from '../layout/layout';
 import Channels from '../channels/channels';
 import Messages from '../messages/messages';
@@ -10,7 +9,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchChannels());
+    dispatch(fetchData());
   }, [dispatch]);
 
   return (
