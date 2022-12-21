@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../../store/reducers/channels';
-// import { actions as channelsActions } from '../slices/channelsSlice.js';
 
 const Channel = ({ channel }) => {
   const dispatch = useDispatch();
