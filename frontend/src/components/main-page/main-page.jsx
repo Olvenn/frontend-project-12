@@ -5,13 +5,18 @@ import Layout from '../layout/layout';
 import Channels from '../channels/channels';
 import Messages from '../messages/messages';
 import useSocket from '../../hooks/useSocket';
+import { actions as channelsActions } from '../../store/reducers/channels';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const channel = useSocket();
 
   const handleClick = () => {
-    channel.createChannel({ channel: 'New Channel 1' });
+    channel.createChannel(
+      { name: 'New Channel 3' },
+      (result) => dispatch(channelsActions.setChannel(result[0].data)),
+      () => { console.log('error'); },
+    );
   };
 
   useEffect(() => {
