@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import useAuth from '../../hooks/useAuth';
 import routes from '../../routes';
 
-const Registration = () => {
+const RegistrationPage = () => {
   const navigate = useNavigate();
   const inputRef = useRef();
   const auth = useAuth();
@@ -31,7 +31,8 @@ const Registration = () => {
       .min(6, 'Min 6'),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref('password')], 'Passwords must match'),
+      .oneOf([yup.ref('password')], 'Passwords don\'t match')
+      .required('Required'),
   });
 
   const formik = useFormik({
@@ -68,7 +69,7 @@ const Registration = () => {
         <div className="card shadow-sm">
           <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
             <div>
-              <img src="/static/media/avatar_1.6084447160acc893a24d.jpg" className="rounded-circle" alt="Регистрация" />
+              <img src="./images/avatar.jpg" className="rounded-circle" alt="Регистрация" />
             </div>
             <Form
               onSubmit={formik.handleSubmit}
@@ -86,15 +87,18 @@ const Registration = () => {
                   autoComplete="username"
                   required
                   id="username"
-                  isInvalid={registration}
+                  isInvalid={
+                    (formik.errors.username && formik.touched.username)
+                    || registration
+                  }
                   value={formik.values.username}
                   ref={inputRef}
                 />
-                <Form.Label className="form-label" for="username">
+                <Form.Label className="form-label" htmlFor="username">
                   Имя пользователя
                 </Form.Label>
-                <Form.Control.Feedback class="invalid-tooltip" type="invalid" tooltip placement="right">
-                  Обязательное поле
+                <Form.Control.Feedback className="invalid-tooltip" type="invalid">
+                  {formik.errors.username}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="form-floating mb-3">
@@ -107,16 +111,19 @@ const Registration = () => {
                   autoComplete="new-password"
                   type="password"
                   id="password"
-                  isInvalid={registration}
+                  isInvalid={
+                    (formik.errors.password && formik.touched.password)
+                    || registration
+                  }
                   className="form-control"
                   value={formik.values.password}
                 />
-                <Form.Control.Feedback className="invalid-tooltip" type="invalid" tooltip>
-                  Обязательное поле
-                </Form.Control.Feedback>
                 <Form.Label className="form-label" htmlFor="password">
                   Пароль
                 </Form.Label>
+                <Form.Control.Feedback className="invalid-tooltip" type="invalid" tooltip>
+                  {formik.errors.password}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="form-floating mb-4">
                 <Form.Control
@@ -127,7 +134,10 @@ const Registration = () => {
                   autoComplete="new-password"
                   type="password"
                   id="confirmPassword"
-                  isInvalid={registration}
+                  isInvalid={
+                    (formik.errors.confirmPassword && formik.touched.confirmPassword)
+                    || registration
+                  }
                   className="form-control"
                   value={formik.values.confirmPassword}
                 />
@@ -135,10 +145,11 @@ const Registration = () => {
                 <Form.Label className="form-label" htmlFor="confirmPassword">
                   Подтвердите пароль
                 </Form.Label>
+                <Form.Control.Feedback className="invalid-tooltip" type="invalid" tooltip>
+                  {formik.errors.confirmPassword}
+                </Form.Control.Feedback>
               </Form.Group>
-              <Button
-                type="submit"
-                className="w-100 btn btn-outline-primary">
+              <Button type="submit" variant="outline-primary" className="w-100 btn">
                 Зарегистрироваться
               </Button>
             </Form>
@@ -149,4 +160,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationPage;

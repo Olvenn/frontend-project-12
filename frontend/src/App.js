@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import NotFoundPage from './components/not-found-page/not-found-page';
 import MainPage from './components/main-page/main-page';
+import RegistrationPage from './components/registration/registration';
 import Auth from './components/auth/auth';
 import useAuth from './hooks/useAuth';
 import AuthProvider from './providers/AuthProvider';
@@ -24,6 +25,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
         <Route path="login" element={<Auth />} />
+        <Route path="registration" element={<RegistrationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
