@@ -99,7 +99,13 @@ const Auth = () => {
                       Неверные имя пользователя или пароль
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Button type="submit" className="w-100 mb-3 btn" variant="outline-primary">Войти</Button>
+                  <Button
+                    type="submit"
+                    className="w-100 mb-3 btn"
+                    variant="outline-primary"
+                  >
+                    Войти
+                  </Button>
                 </Form>
               </div>
               <div className="card-footer p-4">

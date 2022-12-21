@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '../../store/api-actions';
 import Layout from '../layout/layout';
-import Channels from '../channels/channels';
-import Messages from '../messages/messages';
 import useSocket from '../../hooks/useSocket';
 import { actions as channelsActions } from '../../store/reducers/channels';
+import Channels from '../channels/channels';
+import Messages from '../messages/messages';
+import AddCannelModal from '../modals/add-channel-modal';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const MainPage = () => {
   return (
     <Layout>
       <div className="container h-100 my-4 overflow-hidden rounded shadow">
+        <AddCannelModal />
         <div className="row h-100 bg-white flex-md-row">
           <Channels />
           <div className="col p-0 h-100">
