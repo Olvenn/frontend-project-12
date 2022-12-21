@@ -4,17 +4,30 @@ import { fetchData } from '../api-actions';
 
 const channelsAdapter = createEntityAdapter();
 
+const DEFAULI_ID = 1;
+
 const initialState = channelsAdapter.getInitialState({
-  currentChannelId: 1,
+  currentChannelId: DEFAULI_ID,
 });
 
 const channelsSlice = createSlice({
   name: 'channels',
   initialState,
   reducers: {
-    addChannel: channelsAdapter.addOne,
+    createChannel: channelsAdapter.addOne,
     setCurrentChannelId: ((state, action) => {
       state.currentChannelId = action.payload;
+    }),
+    changeChannelName: channelsAdapter.updateOne,
+    renameChannel: ((state, action) => {
+      state.currentChannelId = action.payload;
+    }),
+    removeChannel: ((state, action) => {
+      const { id } = action.payload;
+      channelsAdapter.removeOne(state, id);
+      if (id === state.currentChannelId) {
+        state.currentChannelId = DEFAULI_ID;
+      }
     }),
   },
   extraReducers: (builder) => {

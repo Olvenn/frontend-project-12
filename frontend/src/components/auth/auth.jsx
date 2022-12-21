@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import routes from '../../routes';
-import useAuth from '../../hooks/index';
+import useAuth from '../../hooks/useAuth';
 import Layout from '../layout/layout';
 
 const Auth = () => {

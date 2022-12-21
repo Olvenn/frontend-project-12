@@ -7,8 +7,7 @@ import {
 import NotFoundPage from './components/not-found-page/not-found-page';
 import MainPage from './components/main-page/main-page';
 import Auth from './components/auth/auth';
-// import PrivateRoute from './components/private-route/private-route';
-import useAuth from './hooks/index';
+import useAuth from './hooks/useAuth';
 import AuthProvider from './providers/AuthProvider';
 
 const PrivateRoute = ({ children }) => {

@@ -4,9 +4,15 @@ import { fetchData } from '../../store/api-actions';
 import Layout from '../layout/layout';
 import Channels from '../channels/channels';
 import Messages from '../messages/messages';
+import useSocket from '../../hooks/useSocket';
 
 const MainPage = () => {
   const dispatch = useDispatch();
+  const channel = useSocket();
+
+  const handleClick = () => {
+    channel.createChannel({ channel: 'New Channel 1' });
+  };
 
   useEffect(() => {
     dispatch(fetchData());
@@ -28,6 +34,7 @@ const MainPage = () => {
                 <span className="text-muted">
                   0 сообщений
                 </span>
+                <button onClick={handleClick} type="button">Temp</button>
               </div>
               <Messages />
               <div className="mt-auto px-5 py-3">
