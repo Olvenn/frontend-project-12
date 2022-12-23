@@ -30,11 +30,19 @@ const AddCannelModal = ({ onClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { setStatus, setSubmitting }) => {
+      setStatus();
+      setSubmitting(true);
       socletApi.createChannel(
         { name: values.name },
-        () => { onClose(); },
-        () => { console.log('error'); },
+        () => {
+          onClose();
+          setSubmitting(false);
+        },
+        () => {
+          console.log('error');
+          setSubmitting(false);
+        },
       );
     },
   });
@@ -60,12 +68,14 @@ const AddCannelModal = ({ onClose }) => {
             className="me-2 btn"
             variant="secondary"
             onClick={onClose}
+            disabled={formik.isSubmitting}
           >
             Отменить
           </Button>
           <Button
             type="submit"
             variant="primary"
+            disabled={formik.isSubmitting}
           >
             Отправить
           </Button>
