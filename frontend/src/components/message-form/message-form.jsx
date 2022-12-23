@@ -5,7 +5,6 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import useAuth from '../../hooks/useAuth';
 import useSocket from '../../hooks/useSocket';
-import { selectors } from '../../store/reducers/messages';
 
 const MessageForm = () => {
   const inputRef = useRef();
@@ -13,8 +12,8 @@ const MessageForm = () => {
   const user = auth.username;
   const socketApi = useSocket();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const messages = useSelector(selectors.selectAll);
-  console.log('adgas', messages);
+
+  console.log('adgas', user);
 
   useEffect(() => {
     inputRef.current.focus();

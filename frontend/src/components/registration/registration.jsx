@@ -46,6 +46,8 @@ const RegistrationPage = () => {
       setRegistration(false);
 
       try {
+        console.log('values.username', values.username);
+
         const res = await axios.post(routes.registrationPath(), {
           username: values.username,
           password: values.password,
@@ -57,6 +59,10 @@ const RegistrationPage = () => {
           setRegistration(true);
           inputRef.current.select();
           return;
+        }
+        if (err.isAxiosError && err.response.status === 409) {
+          setRegistration(true);
+          inputRef.current.select();
         }
         throw err;
       }

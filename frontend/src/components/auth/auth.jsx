@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { useFormik } from 'formik';
@@ -113,9 +113,9 @@ const Auth = () => {
                   <span>
                     Нет аккаунта?
                   </span>
-                  <a href="/signup">
+                  <Link to="/registration">
                     Регистрация
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

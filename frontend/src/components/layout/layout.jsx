@@ -1,24 +1,33 @@
-// import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
-const Layout = ({ children }) => (
-  <div className="h-100">
-    <div className="h-100" id="chat">
-      <div className="d-flex flex-column h-100">
-        <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-          <div className="container">
-            <a className="navbar-brand" href="/">
-              Hexlet Chat
-            </a>
-            <button type="button" className="btn btn-primary">
-              Выйти
-            </button>
-          </div>
-        </nav>
-        {children}
+const Layout = ({ children }) => {
+  const auth = useAuth();
+
+  const handleLogOutClick = () => {
+    auth.logOut();
+  };
+
+  return (
+    <div className="h-100">
+      <div className="h-100" id="chat">
+        <div className="d-flex flex-column h-100">
+          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+            <div className="container">
+              <Link className="navbar-brand" to="/">
+                Hexlet Chat
+              </Link>
+              <button onClick={handleLogOutClick} type="button" className="btn btn-primary">
+                Выйти
+              </button>
+            </div>
+          </nav>
+          {children}
+        </div>
+        <div className="Toastify" />
       </div>
-      <div className="Toastify" />
     </div>
-  </div>
-);
+  );
+};
 
 export default Layout;
