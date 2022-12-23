@@ -27,11 +27,19 @@ const RenameCannelModal = ({ onClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { setStatus, setSubmitting }) => {
+      setStatus();
+      setSubmitting(true);
       api.renameChannel(
         { id: removeId, name: values.name },
-        () => { onClose(); },
-        () => { console.log('error'); },
+        () => {
+          onClose();
+          setSubmitting(false);
+        },
+        () => {
+          console.log('error');
+          setSubmitting(false);
+        },
       );
     },
   });
@@ -57,12 +65,14 @@ const RenameCannelModal = ({ onClose }) => {
             className="me-2 btn"
             variant="secondary"
             onClick={onClose}
+            disabled={formik.isSubmitting}
           >
             Отменить
           </Button>
           <Button
             type="submit"
             variant="primary"
+            disabled={formik.isSubmitting}
           >
             Отправить
           </Button>
