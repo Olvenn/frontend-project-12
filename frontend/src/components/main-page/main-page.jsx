@@ -8,15 +8,6 @@ import Modals from '../modals/modal';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  // const channelApi = useSocket();
-
-  // const handleClick = () => {
-  //   channelApi.createChannel(
-  //     { name: 'New Channel 3' },
-  //     (result) => dispatch(channelsActions.createChannel(result[0].data)),
-  //     () => { console.log('error'); },
-  //   );
-  // };
 
   useEffect(() => {
     dispatch(fetchData());

@@ -1,5 +1,6 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-// import { fetchData } from '../api-actions';
+// eslint-disable-next-line import/no-cycle
+import { fetchData } from '../api-actions';
 
 const messagesAdapter = createEntityAdapter();
 
@@ -9,17 +10,19 @@ const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
-    addMessages: messagesAdapter.addMany,
-    addMessage: messagesAdapter.addOne,
+    addMessage: (state, { payload }) => {
+      const { message } = payload;
+      messagesAdapter.addOne(state, message);
+    },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchData.fulfilled, (state, action) => {
-  //       const { messages } = action.payload;
-  //       messagesAdapter.setAll(state, messages);
-  //       // console.log('messages', messages);
-  //     });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.fulfilled, (state, action) => {
+        const { messages } = action.payload;
+        messagesAdapter.setAll(state, messages);
+        console.log('messages', messages);
+      });
+  },
 });
 
 export const { actions } = messagesSlice;

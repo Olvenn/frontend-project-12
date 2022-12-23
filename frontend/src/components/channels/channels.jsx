@@ -6,7 +6,6 @@ import { actions } from '../../store/reducers/modals';
 const Cannels = () => {
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
-  // console.log('adgas', channels);
 
   const handleAddClick = () => {
     console.log('adding');
