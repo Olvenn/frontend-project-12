@@ -9,7 +9,6 @@ import routes from '../routes';
 const getAuthHeader = () => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
   if (currentUser && currentUser.token) {
-    console.log(currentUser.token);
     return { Authorization: `Bearer ${currentUser.token}` };
   }
   return {};
@@ -35,7 +34,6 @@ export const fetchData = createAsyncThunk(
   'tasks/fetchTasks',
   async () => {
     const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
-    console.log('response', response.data);
 
     return response.data;
   },

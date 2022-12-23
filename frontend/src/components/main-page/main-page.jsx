@@ -6,14 +6,14 @@ import useSocket from '../../hooks/useSocket';
 import { actions as channelsActions } from '../../store/reducers/channels';
 import Channels from '../channels/channels';
 import Messages from '../messages/messages';
-import AddCannelModal from '../modals/add-channel-modal';
+import Modals from '../modals/modal';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const channel = useSocket();
+  const channelApi = useSocket();
 
   const handleClick = () => {
-    channel.createChannel(
+    channelApi.createChannel(
       { name: 'New Channel 3' },
       (result) => dispatch(channelsActions.setChannel(result[0].data)),
       () => { console.log('error'); },
@@ -27,7 +27,7 @@ const MainPage = () => {
   return (
     <Layout>
       <div className="container h-100 my-4 overflow-hidden rounded shadow">
-        <AddCannelModal />
+        <Modals />
         <div className="row h-100 bg-white flex-md-row">
           <Channels />
           <div className="col p-0 h-100">
