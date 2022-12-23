@@ -1,20 +1,18 @@
 import { Modal, Button } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { actions } from '../../store/reducers/modals';
+import { useSelector } from 'react-redux';
 import useSocket from '../../hooks/useSocket';
-import { actions as channelAction } from '../../store/reducers/channels';
 
-const RemoveCannelModal = () => {
-  const dispatch = useDispatch();
-  const removeApi = useSocket();
+const RemoveCannelModal = ({ onClose }) => {
+  const socketApi = useSocket();
   const removeId = useSelector((state) => state.channels.changedChannelId);
   console.log('removeId', removeId);
 
   const handleClick = () => {
-    removeApi.removeChannel(
-      { removeId },
+    console.log('remove');
+    socketApi.removeChannel(
+      { id: removeId },
       () => {
-        dispatch(channelAction.removeChannel(removeId));
+        onClose();
       },
       () => { console.log('error'); },
     );
@@ -29,7 +27,7 @@ const RemoveCannelModal = () => {
         <Button
           className="me-2 btn"
           variant="secondary"
-          onClick={() => dispatch(actions.hideModal())}
+          onClick={onClose}
         >
           Отменить
         </Button>

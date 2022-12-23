@@ -1,17 +1,16 @@
 import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import * as yup from 'yup';
 import { selectors } from '../../store/reducers/channels';
 import useSocket from '../../hooks/useSocket';
-import { actions } from '../../store/reducers/modals';
 
-const RenameCannelModal = () => {
-  const dispatch = useDispatch();
+const RenameCannelModal = ({ onClose }) => {
   const inputRef = useRef();
   const api = useSocket();
   const channels = useSelector(selectors.selectAll);
+  const removeId = useSelector((state) => state.channels.changedChannelId);
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -29,12 +28,11 @@ const RenameCannelModal = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      api.createChannel(
-        { name: values.name },
-        (result) => dispatch(actions.setChannel(result[0].data)),
+      api.renameChannel(
+        { id: removeId, name: values.name },
+        () => { onClose(); },
         () => { console.log('error'); },
       );
-      dispatch(actions.hideModal());
     },
   });
 
@@ -58,7 +56,7 @@ const RenameCannelModal = () => {
           <Button
             className="me-2 btn"
             variant="secondary"
-            onClick={() => dispatch(actions.hideModal())}
+            onClick={onClose}
           >
             Отменить
           </Button>

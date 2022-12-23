@@ -19,14 +19,19 @@ const Modals = () => {
   if (!isOpen) return null;
 
   const Component = modalsData[type][0];
+
+  const handleClose = () => {
+    dispatch(actions.hideModal());
+  };
+
   return (
     <Modal show centered>
-      <Modal.Header closeButton onHide={() => dispatch(actions.hideModal())}>
+      <Modal.Header closeButton onHide={handleClose}>
         <Modal.Title>
           {modalsData[type][1]}
         </Modal.Title>
       </Modal.Header>
-      <Component />
+      <Component onClose={handleClose} />
     </Modal>
   );
 };

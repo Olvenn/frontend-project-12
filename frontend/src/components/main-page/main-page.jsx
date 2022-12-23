@@ -15,7 +15,7 @@ const MainPage = () => {
   const handleClick = () => {
     channelApi.createChannel(
       { name: 'New Channel 3' },
-      (result) => dispatch(channelsActions.setChannel(result[0].data)),
+      (result) => dispatch(channelsActions.createChannel(result[0].data)),
       () => { console.log('error'); },
     );
   };

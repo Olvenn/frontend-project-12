@@ -28,39 +28,35 @@ const Channel = ({ channel }) => {
   });
 
   return (
-    <li className="nav-item w-100">
-      <Dropdown as={ButtonGroup}>
-        <button
-          onClick={() => handleIdClick(channel.id)}
-          type="button"
-          className={channelClass}
-        >
-          <span className="me-1">
-            #
-          </span>
-          {channel.name}
-        </button>
-
-        <Dropdown.Toggle
-          split
-          variant={channel.id === currentChannelId ? 'secondary' : 'light'}
-          className="flex-grow-0 text-end"
-        >
-          <span className="visually-hidden">
-            Управление каналом
-          </span>
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={handleRemoveClick}>
-            Удалить
-          </Dropdown.Item>
-          <Dropdown.Item onClick={handleRenameClick}>
-            Переименовать
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </li>
+    <Dropdown as={ButtonGroup} className="nav-item w-100">
+      <button
+        onClick={() => handleIdClick(channel.id)}
+        type="button"
+        className={channelClass}
+      >
+        <span className="me-1">
+          #
+        </span>
+        {channel.name}
+      </button>
+      <Dropdown.Toggle
+        split
+        variant={channel.id === currentChannelId ? 'secondary' : 'light'}
+        className="flex-grow-0 text-end"
+      >
+        <span className="visually-hidden">
+          Управление каналом
+        </span>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={handleRemoveClick}>
+          Удалить
+        </Dropdown.Item>
+        <Dropdown.Item onClick={handleRenameClick}>
+          Переименовать
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

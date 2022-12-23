@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { fetchData } from '../api-actions';
+// import { fetchData } from '../api-actions';
 
 const messagesAdapter = createEntityAdapter();
 
@@ -12,14 +12,14 @@ const messagesSlice = createSlice({
     addMessages: messagesAdapter.addMany,
     addMessage: messagesAdapter.addOne,
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchData.fulfilled, (state, action) => {
-        const { messages } = action.payload;
-        messagesAdapter.setAll(state, messages);
-        // console.log('messages', messages);
-      });
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(fetchData.fulfilled, (state, action) => {
+  //       const { messages } = action.payload;
+  //       messagesAdapter.setAll(state, messages);
+  //       // console.log('messages', messages);
+  //     });
+  // },
 });
 
 export const { actions } = messagesSlice;

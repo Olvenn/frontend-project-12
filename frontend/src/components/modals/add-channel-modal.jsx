@@ -1,15 +1,13 @@
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import useSocket from '../../hooks/useSocket';
 import { selectors } from '../../store/reducers/channels';
-import { actions } from '../../store/reducers/modals';
 
-const AddCannelModal = () => {
-  const dispatch = useDispatch();
-  const api = useSocket();
+const AddCannelModal = ({ onClose }) => {
+  const socletApi = useSocket();
   const inputRef = useRef();
   const channels = useSelector(selectors.selectAll);
 
@@ -33,12 +31,11 @@ const AddCannelModal = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      api.createChannel(
+      socletApi.createChannel(
         { name: values.name },
-        (result) => dispatch(actions.setChannel(result[0].data)),
+        () => { onClose(); },
         () => { console.log('error'); },
       );
-      dispatch(actions.hideModal());
     },
   });
 
@@ -62,7 +59,7 @@ const AddCannelModal = () => {
           <Button
             className="me-2 btn"
             variant="secondary"
-            onClick={() => dispatch(actions.hideModal())}
+            onClick={onClose}
           >
             Отменить
           </Button>
