@@ -73,6 +73,7 @@ const RenameCannelModal = ({ onClose }) => {
             type="submit"
             variant="primary"
             disabled={formik.isSubmitting}
+            onKeyDown={formik.handleSubmit}
           >
             Отправить
           </Button>

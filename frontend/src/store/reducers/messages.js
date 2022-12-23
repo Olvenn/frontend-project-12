@@ -1,6 +1,8 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 import { fetchData } from '../api-actions';
+// eslint-disable-next-line import/no-cycle
+import { actions as channelsActions } from './channels';
 
 const messagesAdapter = createEntityAdapter();
 
@@ -21,6 +23,13 @@ const messagesSlice = createSlice({
         const { messages } = action.payload;
         messagesAdapter.setAll(state, messages);
         console.log('messages', messages);
+      })
+      .addCase(channelsActions.removeChannel, (state, action) => {
+        const id = action.payload;
+        const restEntities = Object.values(state.entities)
+          .filter((message) => message.id !== id)
+          .map((message) => message.id);
+        messagesAdapter.removeMany(state, restEntities);
       });
   },
 });

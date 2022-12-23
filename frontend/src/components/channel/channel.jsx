@@ -39,23 +39,28 @@ const Channel = ({ channel }) => {
         </span>
         {channel.name}
       </button>
-      <Dropdown.Toggle
-        split
-        variant={channel.id === currentChannelId ? 'secondary' : 'light'}
-        className="flex-grow-0 text-end"
-      >
-        <span className="visually-hidden">
-          Управление каналом
-        </span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={handleRemoveClick}>
-          Удалить
-        </Dropdown.Item>
-        <Dropdown.Item onClick={handleRenameClick}>
-          Переименовать
-        </Dropdown.Item>
-      </Dropdown.Menu>
+      {channel.removable
+        && (
+          <>
+            <Dropdown.Toggle
+              split
+              variant={channel.id === currentChannelId ? 'secondary' : 'light'}
+              className="flex-grow-0 text-end"
+            >
+              <span className="visually-hidden">
+                Управление каналом
+              </span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleRemoveClick}>
+                Удалить
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameClick}>
+                Переименовать
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </>
+        )}
     </Dropdown>
   );
 };
