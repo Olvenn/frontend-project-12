@@ -26,11 +26,16 @@ const channelsSlice = createSlice({
     setChangedChannelId: ((state, action) => {
       state.changedChannelId = action.payload;
     }),
-    // renameChannel: channelsAdapter.updateOne,
     renameChannel: ((state, { payload }) => {
       const { channel } = payload;
-      const { id } = channel;
-      channelsAdapter.updateOne(state, id);
+      const { id, name } = channel;
+      const newChannel = {
+        id,
+        changes: {
+          name,
+        },
+      };
+      channelsAdapter.updateOne(state, newChannel);
       if (id === state.currentChannelId) {
         state.currentChannelId = DEFAULI_ID;
       }
