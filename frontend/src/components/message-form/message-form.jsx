@@ -9,11 +9,11 @@ import useSocket from '../../hooks/useSocket';
 const MessageForm = () => {
   const inputRef = useRef();
   const auth = useAuth();
-  const user = auth.username;
+  const user = auth.userName?.username;
   const socketApi = useSocket();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
-  console.log('adgas', user);
+  console.log('adgas', auth);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -37,6 +37,7 @@ const MessageForm = () => {
       const text = values.body;
       const channelId = currentChannelId;
       const username = user;
+      console.log('user', user);
       const data = {
         body: text,
         channelId,
