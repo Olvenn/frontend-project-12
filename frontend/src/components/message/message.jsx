@@ -6,7 +6,7 @@ const Message = ({ message }) => {
 
   return (
     <div className="text-break mb-2">
-      <b>{auth.username}</b>
+      <b>{auth.userName.username}</b>
       {`: ${message.body}`}
     </div>
   );
