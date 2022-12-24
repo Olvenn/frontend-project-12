@@ -3,10 +3,8 @@ import AuthContext from '../contexts/authContext';
 
 const AuthProvider = ({ children }) => {
   const localStorageData = JSON.parse(localStorage.getItem('user'));
-  const user = localStorageData ? localStorageData.userName : 'guest';
+  const user = localStorageData ? localStorageData.username : 'guest';
   const [userName, setUserName] = useState(user);
-  // alert(JSON.stringify(userName));
-  // alert(JSON.parse(token).token);
 
   const logIn = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));

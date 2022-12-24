@@ -3,7 +3,7 @@ const Message = ({ message }) => {
 
   return (
     <div className="text-break mb-2">
-      <b>{message.userName}</b>
+      <b>{message.username}</b>
       {`: ${message.body}`}
     </div>
   );

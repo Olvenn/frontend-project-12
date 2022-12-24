@@ -9,7 +9,7 @@ import useSocket from '../../hooks/useSocket';
 const MessageForm = () => {
   const inputRef = useRef();
   const auth = useAuth();
-  const user = auth.username;
+  const user = auth.userName;
   const socketApi = useSocket();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
