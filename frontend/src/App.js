@@ -13,7 +13,6 @@ import AuthProvider from './providers/AuthProvider';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
-  console.log('app', auth);
 
   return (
     auth.userName !== 'guest' ? children : <Navigate to="/login" replace />
