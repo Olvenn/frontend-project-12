@@ -32,7 +32,7 @@ const MessageForm = () => {
       body: '',
     },
     validationSchema,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
+    onSubmit: (values, { setStatus, setSubmitting, resetForm }) => {
       setStatus();
       setSubmitting(true);
       const text = leoProfanity.clean(values.body);
@@ -47,6 +47,7 @@ const MessageForm = () => {
         data,
         () => {
           setSubmitting(false);
+          resetForm();
         },
         () => {
           console.log('error');
@@ -69,7 +70,6 @@ const MessageForm = () => {
             aria-label={t('messages.new')}
             placeholder={t('messages.input')}
             className="border-0 p-0 ps-2 form-control"
-
           />
           <Button
             type="submit"

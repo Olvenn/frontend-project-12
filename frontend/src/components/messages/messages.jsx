@@ -9,8 +9,6 @@ const Messages = () => {
   const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannelName = useSelector((state) => state.channels.currentChannelName);
-  console.log('currentChannelName2', currentChannelName);
-
   const messages = rawMessages?.filter((message) => message.channelId === currentChannelId);
 
   return (

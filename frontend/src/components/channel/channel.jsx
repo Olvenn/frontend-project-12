@@ -9,7 +9,6 @@ const Channel = ({ channel }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  console.log('channel', channel.name);
 
   const handleIdClick = (id) => {
     dispatch(channelAction.setCurrentChannelId(id));

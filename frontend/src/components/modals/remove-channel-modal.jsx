@@ -8,10 +8,8 @@ const RemoveCannelModal = ({ onClose }) => {
   const socketApi = useSocket();
   const { t } = useTranslation();
   const removeId = useSelector((state) => state.channels.changedChannelId);
-  console.log('removeId', removeId);
 
   const handleClick = () => {
-    console.log('remove');
     socketApi.removeChannel(
       { id: removeId },
       () => {
