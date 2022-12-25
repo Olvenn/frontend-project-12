@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import routes from '../../routes';
 import useAuth from '../../hooks/useAuth';
 import Layout from '../layout/layout';
@@ -50,6 +51,7 @@ const Auth = () => {
           inputRef.current.select();
           return;
         }
+        toast.error(t('errors.unknown'));
         throw err;
       }
     },

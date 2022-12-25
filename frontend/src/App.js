@@ -4,6 +4,7 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import NotFoundPage from './components/not-found-page/not-found-page';
 import MainPage from './components/main-page/main-page';
 import RegistrationPage from './components/registration/registration';
@@ -28,6 +29,7 @@ const App = () => (
         <Route path="registration" element={<RegistrationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   </AuthProvider>
 );

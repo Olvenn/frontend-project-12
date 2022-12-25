@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
 import { selectors } from '../../store/reducers/channels';
 import useSocket from '../../hooks/useSocket';
 
@@ -35,11 +36,12 @@ const RenameCannelModal = ({ onClose }) => {
       api.renameChannel(
         { id: removeId, name: values.name },
         () => {
+          toast.success(t('modalRename.success'));
           onClose();
           setSubmitting(false);
         },
         () => {
-          console.log('error');
+          toast.error(t('errors.unknown'));
           setSubmitting(false);
         },
       );
@@ -77,7 +79,7 @@ const RenameCannelModal = ({ onClose }) => {
             disabled={formik.isSubmitting}
             onKeyDown={formik.handleSubmit}
           >
-            {t('modals.send')}
+            {t('modalRename.send')}
           </Button>
         </div>
       </Form>

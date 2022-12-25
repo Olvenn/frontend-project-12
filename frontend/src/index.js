@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { io } from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store/index';
 import { initSocketApi } from './store/api-actions';
 import AuthContext from './contexts/socketContext';

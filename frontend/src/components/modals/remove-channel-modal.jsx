@@ -1,6 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import useSocket from '../../hooks/useSocket';
 
 const RemoveCannelModal = ({ onClose }) => {
@@ -14,9 +15,12 @@ const RemoveCannelModal = ({ onClose }) => {
     socketApi.removeChannel(
       { id: removeId },
       () => {
+        toast.success(t('modalRemove.success'));
         onClose();
       },
-      () => { console.log('error'); },
+      () => {
+        toast.error(t('errors.unknown'));
+      },
     );
   };
 

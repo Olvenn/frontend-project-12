@@ -18,7 +18,7 @@ const Cannels = () => {
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>
-          {t('channels.title')}
+          {t('channels.name')}
         </span>
         <button onClick={handleAddClick} type="button" className="p-0 text-primary btn btn-group-vertical">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">

@@ -5,6 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 import useAuth from '../../hooks/useAuth';
 import routes from '../../routes';
 
@@ -61,9 +62,11 @@ const RegistrationPage = () => {
           return;
         }
         if (err.isAxiosError && err.response.status === 409) {
+          toast.error(t('errors.network'));
           setRegistration(true);
           inputRef.current.select();
         }
+        toast.error(t('errors.unknown'));
         throw err;
       }
     },

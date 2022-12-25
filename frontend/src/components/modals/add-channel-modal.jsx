@@ -4,6 +4,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 import useSocket from '../../hooks/useSocket';
 import { selectors } from '../../store/reducers/channels';
 
@@ -39,10 +40,11 @@ const AddCannelModal = ({ onClose }) => {
         { name: values.name },
         () => {
           onClose();
+          toast.success(t('modalAdd.success'));
           setSubmitting(false);
         },
         () => {
-          console.log('error');
+          toast.error(t('errors.unknown'));
           setSubmitting(false);
         },
       );
@@ -80,7 +82,7 @@ const AddCannelModal = ({ onClose }) => {
             disabled={formik.isSubmitting}
             onKeyDown={formik.handleSubmit}
           >
-            {t('modals.send')}
+            {t('modalAdd.send')}
           </Button>
         </div>
       </Form>
