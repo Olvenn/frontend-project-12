@@ -47,7 +47,6 @@ const RegistrationPage = () => {
     validationSchema,
     onSubmit: async (values) => {
       setRegistration(false);
-
       try {
         const res = await axios.post(routes.registrationPath(), {
           username: values.username,

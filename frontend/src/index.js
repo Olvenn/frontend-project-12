@@ -24,7 +24,6 @@ const initApp = () => {
 
   const rollbarConfig = {
     accessToken: process.env.REACT_APP_ACCESS_TOKEN,
-    environment: 'production',
     captureUncaught: true,
     captureUnhandledRejections: true,
     payload: {
