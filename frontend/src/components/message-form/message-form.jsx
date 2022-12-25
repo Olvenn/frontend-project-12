@@ -4,6 +4,7 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import leoProfanity from 'leo-profanity';
 import useAuth from '../../hooks/useAuth';
 import useSocket from '../../hooks/useSocket';
 
@@ -34,7 +35,7 @@ const MessageForm = () => {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       setStatus();
       setSubmitting(true);
-      const text = values.body;
+      const text = leoProfanity.clean(values.body);
       const channelId = currentChannelId;
       const username = user;
       const data = {

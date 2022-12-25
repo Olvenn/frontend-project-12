@@ -5,6 +5,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
 import { selectors } from '../../store/reducers/channels';
 import useSocket from '../../hooks/useSocket';
 
@@ -13,7 +14,7 @@ const RenameCannelModal = ({ onClose }) => {
   const api = useSocket();
   const { t } = useTranslation();
   const channels = useSelector(selectors.selectAll);
-  const removeId = useSelector((state) => state.channels.changedChannelId);
+  const renameId = useSelector((state) => state.channels.changedChannelId);
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -33,8 +34,9 @@ const RenameCannelModal = ({ onClose }) => {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       setStatus();
       setSubmitting(true);
+      const cleanName = leoProfanity.clean(values.name);
       api.renameChannel(
-        { id: removeId, name: values.name },
+        { id: renameId, name: cleanName },
         () => {
           toast.success(t('modalRename.success'));
           onClose();

@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
 import useSocket from '../../hooks/useSocket';
 import { selectors } from '../../store/reducers/channels';
 
@@ -36,8 +37,9 @@ const AddCannelModal = ({ onClose }) => {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       setStatus();
       setSubmitting(true);
+      const cleanName = leoProfanity.clean(values.name);
       socletApi.createChannel(
-        { name: values.name },
+        { name: cleanName },
         () => {
           onClose();
           toast.success(t('modalAdd.success'));
