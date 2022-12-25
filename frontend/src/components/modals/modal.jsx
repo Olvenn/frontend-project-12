@@ -1,22 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
 // import { actions } from '../../store/reducers/modals';
 import { Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { actions } from '../../store/reducers/modals';
 import AddCannelModal from './add-channel-modal';
 import RemoveCannelModal from './remove-channel-modal';
 import RenameCannelModal from './rename-channel-modal';
 
-const modalsData = {
-  add: [AddCannelModal, 'Добавить канал'],
-  remove: [RemoveCannelModal, 'Удалить канал'],
-  rename: [RenameCannelModal, 'Переименовать канал'],
-};
-
 const Modals = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.isOpen);
   const type = useSelector((state) => state.modals.modalType);
   if (!isOpen) return null;
+
+  const modalsData = {
+    add: [AddCannelModal, t('modalAdd.addChannel')],
+    remove: [RemoveCannelModal, t('modalRemove.removeChannel')],
+    rename: [RenameCannelModal, t('modalRename.renameChannel')],
+  };
 
   const Component = modalsData[type][0];
 

@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Channel from '../channel/channel';
 import { selectors } from '../../store/reducers/channels';
 import { actions } from '../../store/reducers/modals';
 
 const Cannels = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const channels = useSelector(selectors.selectAll);
 
   const handleAddClick = () => {
-    console.log('adding');
-
     dispatch(actions.showModal({ modalType: 'add', itemId: null }));
   };
 
@@ -17,7 +18,7 @@ const Cannels = () => {
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>
-          Каналы
+          {t('channels.title')}
         </span>
         <button onClick={handleAddClick} type="button" className="p-0 text-primary btn btn-group-vertical">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">

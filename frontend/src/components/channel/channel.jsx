@@ -1,15 +1,19 @@
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dropdown, ButtonGroup } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { actions as channelAction } from '../../store/reducers/channels';
 import { actions } from '../../store/reducers/modals';
 
 const Channel = ({ channel }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  console.log('channel', channel.name);
 
   const handleIdClick = (id) => {
     dispatch(channelAction.setCurrentChannelId(id));
+    dispatch(channelAction.setCurrentChannelName(channel.name));
   };
 
   const handleRemoveClick = () => {
@@ -48,15 +52,15 @@ const Channel = ({ channel }) => {
               className="flex-grow-0 text-end"
             >
               <span className="visually-hidden">
-                Управление каналом
+                {t('channels.manage')}
               </span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemoveClick}>
-                Удалить
+                {t('channels.remove')}
               </Dropdown.Item>
               <Dropdown.Item onClick={handleRenameClick}>
-                Переименовать
+                {t('channels.rename')}
               </Dropdown.Item>
             </Dropdown.Menu>
           </>

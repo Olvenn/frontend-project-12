@@ -1,9 +1,11 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import useSocket from '../../hooks/useSocket';
 
 const RemoveCannelModal = ({ onClose }) => {
   const socketApi = useSocket();
+  const { t } = useTranslation();
   const removeId = useSelector((state) => state.channels.changedChannelId);
   console.log('removeId', removeId);
 
@@ -21,7 +23,7 @@ const RemoveCannelModal = ({ onClose }) => {
   return (
     <Modal.Body>
       <p className="lead">
-        Уверены?
+        {t('modalRemove.confirm')}
       </p>
       <div className="d-flex justify-content-end">
         <Button
@@ -29,14 +31,14 @@ const RemoveCannelModal = ({ onClose }) => {
           variant="secondary"
           onClick={onClose}
         >
-          Отменить
+          {t('modals.cancel')}
         </Button>
         <Button
           onClick={handleClick}
           type="submit"
           variant="danger"
         >
-          Удалить
+          {t('modalRemove.remove')}
         </Button>
       </div>
     </Modal.Body>

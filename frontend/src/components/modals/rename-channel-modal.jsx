@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { selectors } from '../../store/reducers/channels';
 import useSocket from '../../hooks/useSocket';
@@ -9,6 +10,7 @@ import useSocket from '../../hooks/useSocket';
 const RenameCannelModal = ({ onClose }) => {
   const inputRef = useRef();
   const api = useSocket();
+  const { t } = useTranslation();
   const channels = useSelector(selectors.selectAll);
   const removeId = useSelector((state) => state.channels.changedChannelId);
 
@@ -16,10 +18,10 @@ const RenameCannelModal = ({ onClose }) => {
     name: yup
       .string()
       .trim()
-      .min(3, 'Min 3')
-      .max(20, 'Max 20')
-      .notOneOf(channels.map((channel) => channel.name), 'Such a channel already exists')
-      .required('Required'),
+      .min(3, t('validation.usernameMinMax'))
+      .max(20, t('validation.usernameMinMax'))
+      .notOneOf(channels.map((channel) => channel.name), t('validation.alreadyExists'))
+      .required(t('validation.required')),
   });
 
   const formik = useFormik({
@@ -56,7 +58,7 @@ const RenameCannelModal = ({ onClose }) => {
           id="name"
           name="name"
         />
-        <Form.Label htmlFor="name" className="visually-hidden">Имя канала</Form.Label>
+        <Form.Label htmlFor="name" className="visually-hidden">{t('modals.name')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {formik.errors.name}
         </Form.Control.Feedback>
@@ -67,7 +69,7 @@ const RenameCannelModal = ({ onClose }) => {
             onClick={onClose}
             disabled={formik.isSubmitting}
           >
-            Отменить
+            {t('modals.cancel')}
           </Button>
           <Button
             type="submit"
@@ -75,7 +77,7 @@ const RenameCannelModal = ({ onClose }) => {
             disabled={formik.isSubmitting}
             onKeyDown={formik.handleSubmit}
           >
-            Отправить
+            {t('modals.send')}
           </Button>
         </div>
       </Form>

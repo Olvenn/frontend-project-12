@@ -22,7 +22,6 @@ const messagesSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, action) => {
         const { messages } = action.payload;
         messagesAdapter.setAll(state, messages);
-        console.log('messages', messages);
       })
       .addCase(channelsActions.removeChannel, (state, action) => {
         const id = action.payload;

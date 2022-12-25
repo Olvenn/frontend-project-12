@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import useSocket from '../../hooks/useSocket';
 import { selectors } from '../../store/reducers/channels';
@@ -9,6 +10,7 @@ import { selectors } from '../../store/reducers/channels';
 const AddCannelModal = ({ onClose }) => {
   const socletApi = useSocket();
   const inputRef = useRef();
+  const { t } = useTranslation();
   const channels = useSelector(selectors.selectAll);
 
   useEffect(() => {
@@ -19,10 +21,10 @@ const AddCannelModal = ({ onClose }) => {
     name: yup
       .string()
       .trim()
-      .min(3, 'Min 3')
-      .max(20, 'Max 20')
-      .notOneOf(channels.map((channel) => channel.name), 'Such a channel already exists')
-      .required('Required'),
+      .min(3, t('validation.usernameMinMax'))
+      .max(20, t('validation.usernameMinMax'))
+      .notOneOf(channels.map((channel) => channel.name), t('validation.alreadyExists'))
+      .required(t('validation.required')),
   });
 
   const formik = useFormik({
@@ -59,7 +61,7 @@ const AddCannelModal = ({ onClose }) => {
           id="name"
           name="name"
         />
-        <Form.Label htmlFor="name" className="visually-hidden">Имя канала</Form.Label>
+        <Form.Label htmlFor="name" className="visually-hidden">{t('modals.name')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {formik.errors.name}
         </Form.Control.Feedback>
@@ -70,7 +72,7 @@ const AddCannelModal = ({ onClose }) => {
             onClick={onClose}
             disabled={formik.isSubmitting}
           >
-            Отменить
+            {t('modals.cancel')}
           </Button>
           <Button
             type="submit"
@@ -78,7 +80,7 @@ const AddCannelModal = ({ onClose }) => {
             disabled={formik.isSubmitting}
             onKeyDown={formik.handleSubmit}
           >
-            Отправить
+            {t('modals.send')}
           </Button>
         </div>
       </Form>

@@ -26,7 +26,7 @@ const ru = {
       hasAccount: 'Уже зарегистрированы?',
     },
     channels: {
-      main: 'Каналы',
+      name: 'Каналы',
       manage: 'Управление каналом',
       remove: 'Удалить',
       rename: 'Переименовать',
@@ -42,31 +42,30 @@ const ru = {
       input: 'Введите сообщение...',
       send: 'Отправить',
     },
-    modalAdd: {
-      addChannel: 'Добавить канал',
+    modals: {
       name: 'Имя канала',
       cancel: 'Отменить',
+    },
+    modalAdd: {
+      addChannel: 'Добавить канал',
       send: 'Отправить',
       success: 'Канал создан',
     },
     modalRename: {
       renameChannel: 'Переименовать канал',
-      name: 'Имя канала',
-      cancel: 'Отменить',
       send: 'Отправить',
       success: 'Канал переименован',
     },
     modalRemove: {
       removeChannel: 'Удалить канал',
       confirm: 'Уверены?',
-      cancel: 'Отменить',
       remove: 'Удалить',
       success: 'Канал удалён',
     },
     notFound: {
-      header: 'Страница не найдена',
-      message: 'Но вы можете перейти ',
-      linkText: 'на главную страницу',
+      notFound: 'Страница не найдена',
+      goTo: 'Но вы можете перейти ',
+      linkMain: 'на главную страницу',
     },
     errors: {
       network: 'Ошибка соединения',

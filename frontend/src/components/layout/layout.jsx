@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import useAuth from '../../hooks/useAuth';
 
 const Layout = ({ children }) => {
   const auth = useAuth();
+  const { t } = useTranslation();
 
   const handleLogOutClick = () => {
     auth.logOut();
@@ -18,7 +20,7 @@ const Layout = ({ children }) => {
                 Hexlet Chat
               </Link>
               <button onClick={handleLogOutClick} type="button" className="btn btn-primary">
-                Выйти
+                {t('logout')}
               </button>
             </div>
           </nav>

@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { store } from './store/index';
 import { initSocketApi } from './store/api-actions';
 import AuthContext from './contexts/socketContext';
+import I18Provider from './providers/I18nextProvider';
 import './index.css';
 import App from './App';
 
@@ -16,9 +17,11 @@ const initApp = () => {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <AuthContext.Provider value={api}>
-          <App />
-        </AuthContext.Provider>
+        <I18Provider>
+          <AuthContext.Provider value={api}>
+            <App />
+          </AuthContext.Provider>
+        </I18Provider>
       </Provider>
     </React.StrictMode>
   );
