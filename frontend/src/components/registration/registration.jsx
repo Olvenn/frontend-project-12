@@ -52,7 +52,6 @@ const RegistrationPage = () => {
           username: values.username,
           password: values.password,
         });
-        console.log('res.data', res.data);
         auth.logIn(res.data);
         navigate('/');
       } catch (err) {

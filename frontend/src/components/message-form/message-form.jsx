@@ -50,7 +50,6 @@ const MessageForm = () => {
           resetForm();
         },
         () => {
-          console.log('error');
           setSubmitting(false);
         },
       );
