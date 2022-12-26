@@ -10,7 +10,7 @@ import useAuth from '../../hooks/useAuth';
 import useSocket from '../../hooks/useSocket';
 
 const MessageForm = () => {
-  const inputRef = useRef();
+  const inputRef = useRef(null);
   const auth = useAuth();
   const user = auth.userName;
   const socketApi = useSocket();
@@ -20,7 +20,7 @@ const MessageForm = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [currentChannelId]);
 
   const validationSchema = yup.object().shape({
     body: yup
@@ -40,6 +40,7 @@ const MessageForm = () => {
       const text = leoProfanity.clean(values.body);
       const channelId = currentChannelId;
       const username = user;
+      inputRef.current.focus();
       const data = {
         body: text,
         channelId,
