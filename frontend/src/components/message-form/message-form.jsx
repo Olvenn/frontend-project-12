@@ -56,7 +56,6 @@ const MessageForm = () => {
           setSubmitting(false);
         },
       );
-      formik.resetForm();
     },
   });
 
