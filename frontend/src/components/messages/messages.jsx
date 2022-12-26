@@ -1,15 +1,24 @@
 import { useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Message from '../message/message';
 import MessageForm from '../message-form/message-form';
 import { selectors } from '../../store/reducers/messages';
 
 const Messages = () => {
-  const rawMessages = useSelector(selectors.selectAll);
+  const lastRef = useRef();
   const { t } = useTranslation();
+
+  const rawMessages = useSelector(selectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannelName = useSelector((state) => state.channels.currentChannelName);
   const messages = rawMessages?.filter((message) => message.channelId === currentChannelId);
+
+  useEffect(() => {
+    lastRef.current.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [messages]);
 
   return (
     <div className="col p-0 h-100">
@@ -27,6 +36,7 @@ const Messages = () => {
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messages?.map((message) => (<Message key={message.id} message={message} />))}
+          <span ref={lastRef} />
         </div>
         <MessageForm />
       </div>
