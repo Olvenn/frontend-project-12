@@ -61,9 +61,10 @@ const RegistrationPage = () => {
           return;
         }
         if (err.isAxiosError && err.response.status === 409) {
-          toast.error(t('errors.network'));
+          toast.error(t('validation.alreadyExists'));
           setRegistration(true);
           inputRef.current.select();
+          return;
         }
         toast.error(t('errors.unknown'));
         throw err;
