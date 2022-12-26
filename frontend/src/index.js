@@ -13,6 +13,8 @@ import I18Provider from './providers/I18nextProvider';
 import './index.css';
 import App from './App';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const initApp = () => {
   const socket = io();
   const api = initSocketApi(socket, store);
@@ -23,11 +25,12 @@ const initApp = () => {
   filter.add(leoProfanity.getDictionary('en'));
 
   const rollbarConfig = {
-    accessToken: process.env.REACT_APP_ACCESS_TOKEN,
+    enabled: isProd,
+    accessToken: process.env.ROLLBAR_TOKEN,
     captureUncaught: true,
     captureUnhandledRejections: true,
     payload: {
-      environment: process.env.NODE_ENV,
+      environment: 'production',
     },
   };
 
