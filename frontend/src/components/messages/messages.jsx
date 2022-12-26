@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Message from '../message/message';
 import MessageForm from '../message-form/message-form';
+import { selectors as channelsSelector } from '../../store/reducers/channels';
 import { selectors } from '../../store/reducers/messages';
 
 const Messages = () => {
@@ -11,7 +12,10 @@ const Messages = () => {
 
   const rawMessages = useSelector(selectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const currentChannelName = useSelector((state) => state.channels.currentChannelName);
+  const channels = useSelector(channelsSelector.selectAll);
+  console.log(channels.find((channel) => channel.id === currentChannelId));
+  const currentChannelName = channels.find((channel) => channel.id === currentChannelId);
+
   const messages = rawMessages?.filter((message) => message.channelId === currentChannelId);
 
   useEffect(() => {
@@ -27,7 +31,7 @@ const Messages = () => {
           <p className="m-0">
             <b>
               #
-              {` ${currentChannelName}`}
+              {` ${currentChannelName?.name}`}
             </b>
           </p>
           <span className="text-muted">

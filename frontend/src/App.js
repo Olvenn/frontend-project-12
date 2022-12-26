@@ -11,6 +11,7 @@ import RegistrationPage from './components/registration/registration';
 import Auth from './components/auth/auth';
 import useAuth from './hooks/useAuth';
 import AuthProvider from './providers/AuthProvider';
+import AppRoute from './const';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -24,10 +25,10 @@ const App = () => (
   <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
-        <Route path="login" element={<Auth />} />
-        <Route path="signup" element={<RegistrationPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path={AppRoute.Root} element={<PrivateRoute><MainPage /></PrivateRoute>} />
+        <Route path={AppRoute.Login} element={<Auth />} />
+        <Route path={AppRoute.Signup} element={<RegistrationPage />} />
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

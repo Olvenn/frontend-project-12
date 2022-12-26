@@ -10,7 +10,6 @@ const DEFAULI_ID = 1;
 const initialState = channelsAdapter.getInitialState({
   currentChannelId: DEFAULI_ID,
   changedChannelId: null,
-  currentChannelName: ' general',
 });
 
 const channelsSlice = createSlice({
@@ -23,9 +22,6 @@ const channelsSlice = createSlice({
     },
     setCurrentChannelId: ((state, action) => {
       state.currentChannelId = action.payload;
-    }),
-    setCurrentChannelName: ((state, action) => {
-      state.currentChannelName = action.payload;
     }),
     setChangedChannelId: ((state, action) => {
       state.changedChannelId = action.payload;

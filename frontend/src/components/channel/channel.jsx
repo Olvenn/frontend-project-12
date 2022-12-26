@@ -12,7 +12,6 @@ const Channel = ({ channel }) => {
 
   const handleIdClick = (id) => {
     dispatch(channelAction.setCurrentChannelId(id));
-    dispatch(channelAction.setCurrentChannelName(channel.name));
   };
 
   const handleRemoveClick = () => {

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import leoProfanity from 'leo-profanity';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import { store } from './store/index';
+import store from './store/index';
 import { initSocketApi } from './store/api-actions';
 import AuthContext from './contexts/socketContext';
 import I18Provider from './providers/I18nextProvider';
