@@ -19,9 +19,15 @@ const Layout = ({ children }) => {
               <Link className="navbar-brand" to="/">
                 Hexlet Chat
               </Link>
-              <button onClick={handleLogOutClick} type="button" className="btn btn-primary">
-                {t('logout')}
-              </button>
+              {auth.userName !== 'guest' && (
+                <button
+                  onClick={handleLogOutClick}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  {t('logout')}
+                </button>
+              )}
             </div>
           </nav>
           {children}

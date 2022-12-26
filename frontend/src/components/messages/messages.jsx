@@ -18,7 +18,7 @@ const Messages = () => {
           <p className="m-0">
             <b>
               #
-              {currentChannelName}
+              {` ${currentChannelName}`}
             </b>
           </p>
           <span className="text-muted">

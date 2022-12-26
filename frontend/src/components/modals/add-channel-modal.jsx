@@ -27,7 +27,7 @@ const AddCannelModal = ({ onClose }) => {
       .trim()
       .min(3, t('validation.usernameMinMax'))
       .max(20, t('validation.usernameMinMax'))
-      .notOneOf(channels.map((channel) => channel.name), t('validation.alreadyExists'))
+      .notOneOf(channels.map((channel) => channel.name), t('validation.unique'))
       .required(t('validation.required')),
   });
 
