@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import { useRollbar } from '@rollbar/react';
 import useSocket from '../../hooks/useSocket';
 import { selectors } from '../../store/reducers/channels';
 
@@ -13,6 +14,7 @@ const AddCannelModal = ({ onClose }) => {
   const socletApi = useSocket();
   const inputRef = useRef();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const channels = useSelector(selectors.selectAll);
 
   useEffect(() => {
@@ -45,7 +47,8 @@ const AddCannelModal = ({ onClose }) => {
           toast.success(t('modalAdd.success'));
           setSubmitting(false);
         },
-        () => {
+        (err) => {
+          rollbar.error(err);
           toast.error(t('errors.unknown'));
           setSubmitting(false);
         },

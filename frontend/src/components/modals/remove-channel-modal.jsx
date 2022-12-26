@@ -2,11 +2,13 @@ import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 import useSocket from '../../hooks/useSocket';
 
 const RemoveCannelModal = ({ onClose }) => {
   const socketApi = useSocket();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const removeId = useSelector((state) => state.channels.changedChannelId);
 
   const handleClick = () => {
@@ -16,7 +18,8 @@ const RemoveCannelModal = ({ onClose }) => {
         toast.success(t('modalRemove.success'));
         onClose();
       },
-      () => {
+      (err) => {
+        rollbar.error(err);
         toast.error(t('errors.unknown'));
       },
     );

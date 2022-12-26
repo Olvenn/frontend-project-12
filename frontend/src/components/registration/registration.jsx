@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 import useAuth from '../../hooks/useAuth';
 import routes from '../../routes';
 
@@ -14,6 +15,7 @@ const RegistrationPage = () => {
   const inputRef = useRef();
   const auth = useAuth();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const [registration, setRegistration] = useState(false);
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const RegistrationPage = () => {
         auth.logIn(res.data);
         navigate('/');
       } catch (err) {
+        rollbar.error(err);
         if (err.isAxiosError && err.response.status === 401) {
           setRegistration(true);
           inputRef.current.select();

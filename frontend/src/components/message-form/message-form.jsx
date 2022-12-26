@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import leoProfanity from 'leo-profanity';
+import { useRollbar } from '@rollbar/react';
 import useAuth from '../../hooks/useAuth';
 import useSocket from '../../hooks/useSocket';
 
@@ -14,6 +15,7 @@ const MessageForm = () => {
   const user = auth.userName;
   const socketApi = useSocket();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
   useEffect(() => {
@@ -49,7 +51,8 @@ const MessageForm = () => {
           setSubmitting(false);
           resetForm();
         },
-        () => {
+        (err) => {
+          rollbar.error(err);
           setSubmitting(false);
         },
       );

@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 import routes from '../../routes';
 import useAuth from '../../hooks/useAuth';
 import Layout from '../layout/layout';
@@ -16,6 +17,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -46,6 +48,7 @@ const Auth = () => {
         auth.logIn(res.data);
         navigate('/');
       } catch (err) {
+        rollbar.error(err);
         if (err.isAxiosError && err.response.status === 401) {
           setValidated(true);
           inputRef.current.select();
@@ -131,9 +134,3 @@ const Auth = () => {
 };
 
 export default Auth;
-// https://formik.org/docs/api/errormessage
-// https://formik.org/docs/api/useFormik
-// https://react-bootstrap.github.io/forms/validation/
-// https://formik.org/docs/guides/validation
-// https://www.smashingmagazine.com/2020/10/react-validation-formik-yup/
-// https://formik.org/docs/guides/validation

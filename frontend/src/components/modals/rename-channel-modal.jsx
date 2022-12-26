@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import { useRollbar } from '@rollbar/react';
 import { selectors } from '../../store/reducers/channels';
 import useSocket from '../../hooks/useSocket';
 
@@ -13,6 +14,7 @@ const RenameCannelModal = ({ onClose }) => {
   const inputRef = useRef();
   const api = useSocket();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const channels = useSelector(selectors.selectAll);
   const renameId = useSelector((state) => state.channels.changedChannelId);
 
@@ -42,7 +44,8 @@ const RenameCannelModal = ({ onClose }) => {
           onClose();
           setSubmitting(false);
         },
-        () => {
+        (err) => {
+          rollbar.error(err);
           toast.error(t('errors.unknown'));
           setSubmitting(false);
         },
