@@ -117,7 +117,7 @@ const Auth = () => {
                   <span>
                     {t('registration.noAccount')}
                   </span>
-                  <Link to="/registration">
+                  <Link to="/signup">
                     {t('registration.signup')}
                   </Link>
                 </div>
