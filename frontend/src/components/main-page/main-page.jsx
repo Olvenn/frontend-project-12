@@ -26,14 +26,10 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchData());
-  });
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
-        console.log(response.data);
+        // console.log(response.data);
 
         dispatch(channelAction.setChannels(response.data));
         dispatch(messageAction.setMessages(response.data));

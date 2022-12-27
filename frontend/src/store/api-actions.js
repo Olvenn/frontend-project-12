@@ -43,7 +43,8 @@ const initSocketApi = (socket, store) => {
   });
 
   socket.on('newChannel', (payload) => {
-    store.dispatch(channelsActions.createChannel({ channel: payload }));
+    console.log(payload);
+    store.dispatch(channelsActions.createChannel(payload));
   });
 
   socket.on('removeChannel', (payload) => {
