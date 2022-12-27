@@ -26,10 +26,6 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchData());
-  });
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });

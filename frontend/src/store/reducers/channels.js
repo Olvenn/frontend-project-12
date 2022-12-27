@@ -1,14 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-cycle
-// import { fetchData } from '../api-actions';
 
 const channelsAdapter = createEntityAdapter();
 
 const DEFAULI_ID = 1;
 
 const initialState = channelsAdapter.getInitialState({
-  channels: [],
   currentChannelId: DEFAULI_ID,
   changedChannelId: null,
 });
@@ -18,13 +15,10 @@ const channelsSlice = createSlice({
   initialState,
   reducers: {
     setChannels: (state, { payload }) => {
-      const { channels, currentChannelId } = payload;
-      state.channels = channels;
-      state.currentChannelId = currentChannelId;
+      channelsAdapter.setAll(state, payload.channels);
     },
-    createChannel: (state, { payload }) => {
-      const { channel } = payload;
-      channelsAdapter.addOne(state, channel);
+    createChannel: (state, action) => {
+      channelsAdapter.addOne(state, action);
     },
     setCurrentChannelId: ((state, action) => {
       state.currentChannelId = action.payload;
@@ -55,14 +49,6 @@ const channelsSlice = createSlice({
       }
     }),
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchData.fulfilled, (state, action) => {
-  //       const { channels, currentChannelId } = action.payload;
-  //       channelsAdapter.setAll(state, channels);
-  //       state.currentChannelId = currentChannelId;
-  //     });
-  // },
 });
 
 export const { actions } = channelsSlice;

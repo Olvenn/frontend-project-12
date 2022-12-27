@@ -49,6 +49,7 @@ const MessageForm = () => {
       socketApi.sendMessage(
         data,
         () => {
+          inputRef.current.focus();
           setSubmitting(false);
           resetForm();
         },

@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-// import { actions } from '../../store/reducers/modals';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { actions } from '../../store/reducers/modals';
