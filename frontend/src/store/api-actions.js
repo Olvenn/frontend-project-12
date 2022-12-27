@@ -1,18 +1,12 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+// import axios from 'axios';
+// import { createAsyncThunk } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 import { actions as channelsActions } from './reducers/channels';
 // eslint-disable-next-line import/no-cycle
 import { actions as messagesActions } from './reducers/messages';
-import routes from '../routes';
-
-const getAuthHeader = () => {
-  const currentUser = JSON.parse(localStorage.getItem('user'));
-  if (currentUser && currentUser.token) {
-    return { Authorization: `Bearer ${currentUser.token}` };
-  }
-  return {};
-};
+// import routes from '../routes';
+// eslint-disable-next-line import/no-cycle
+// import mainStore from './index';
 
 const acknowledgeWithTimeout = (onSuccess, onTimeout) => {
   /* eslint-disable functional/no-let */
@@ -30,16 +24,16 @@ const acknowledgeWithTimeout = (onSuccess, onTimeout) => {
   };
 };
 
-export const fetchData = createAsyncThunk(
-  'tasks/fetchTasks',
-  async () => {
-    const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
+// export const fetchData = createAsyncThunk(
+//   'tasks/fetchTasks',
+//   async () => {
+//     const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
+//     mainStore.dispatch(channelsActions.setChannels(response.data));
+//     return response.data;
+//   },
+// );
 
-    return response.data;
-  },
-);
-
-export const initSocketApi = (socket, store) => {
+const initSocketApi = (socket, store) => {
   const createEmit = (event) => (message, onSuccess, onTimeout) => {
     socket.emit(event, message, acknowledgeWithTimeout(onSuccess, onTimeout));
   };
@@ -67,3 +61,5 @@ export const initSocketApi = (socket, store) => {
     renameChannel: createEmit('renameChannel'),
   };
 };
+
+export default initSocketApi;

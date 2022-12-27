@@ -1,14 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Channel from '../channel/channel';
-import { selectors } from '../../store/reducers/channels';
 import { actions } from '../../store/reducers/modals';
 
 const Cannels = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const channels = useSelector(selectors.selectAll);
+  const channels = useSelector((state) => state.channels.channels);
 
   const handleAddClick = () => {
     dispatch(actions.showModal({ modalType: 'add', itemId: null }));

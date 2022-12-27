@@ -5,12 +5,10 @@ import channels from './reducers/channels';
 import messages from './reducers/messages';
 import modals from './reducers/modals';
 
-const store = configureStore({
+export default configureStore({
   reducer: {
     channels,
     messages,
     modals,
   },
 });
-
-export default store;

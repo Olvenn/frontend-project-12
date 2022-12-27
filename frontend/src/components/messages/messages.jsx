@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import Message from '../message/message';
 import MessageForm from '../message-form/message-form';
 import { selectors as channelsSelector } from '../../store/reducers/channels';
-import { selectors } from '../../store/reducers/messages';
 
 const Messages = () => {
   const lastRef = useRef();
   const { t } = useTranslation();
 
-  const rawMessages = useSelector(selectors.selectAll);
+  const rawMessages = useSelector((state) => state.messages.messages);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const channels = useSelector(channelsSelector.selectAll);
   console.log(channels.find((channel) => channel.id === currentChannelId));
