@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter, current } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 // import { fetchData } from '../api-actions';
 // eslint-disable-next-line import/no-cycle
@@ -16,11 +16,12 @@ const messagesSlice = createSlice({
   initialState,
   reducers: {
     setMessages: (state, { payload }) => {
-      const { messages } = payload;
-      state.messages = messages;
+      messagesAdapter.setAll(state, payload.messages);
+      console.log(current(state));
     },
     addMessage: (state, { payload }) => {
       const { message } = payload;
+      console.log('addMessage', message);
       messagesAdapter.addOne(state, message);
     },
   },

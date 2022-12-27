@@ -9,8 +9,7 @@ const Channel = ({ channel }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const channels = useSelector((state) => state.channels.setNew);
-  console.log('channels', channels);
+  // const channels = useSelector((state) => state.channels.setNew);
 
   const handleIdClick = (id) => {
     dispatch(channelAction.setCurrentChannelId(id));
